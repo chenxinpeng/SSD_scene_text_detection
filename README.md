@@ -8,3 +8,9 @@ This practice is inspired by [ssd-plate_detection](https://github.com/hyh2152103
 
 Meanwhile, I have uploaded my training caffemodel to WeiYun. 
 The link：http://share.weiyun.com/1c544de66be06ea04774fd11e820a780, the extraction code：ERid5Y
+
+Some examples of the scene text detection:
+
+![img1](https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_101.png)
+
+![img2](https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_120.png)
