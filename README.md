@@ -6,8 +6,10 @@ This practice is inspired by [ssd-plate_detection](https://github.com/hyh2152103
 
 **The detail of the above code can read my blog**: http://blog.csdn.net/u010167269/article/details/52851667.
 
-Meanwhile, I have uploaded my training caffemodel to WeiYun. 
-The link：https://share.weiyun.com/1c544de66be06ea04774fd11e820a780
+Meanwhile, I have uploaded my training caffemodel to BaiduYun, Google Drive, Dropbox. 
+ - BaiduYun：https://pan.baidu.com/s/1dE0Ok3v
+ - Google Drive: https://drive.google.com/open?id=0B65vBUruA6N4bzNCSGxTcnEtNjg
+ - Dropbox: https://www.dropbox.com/s/o3mrsfoiyfp21ou/VGG_scenetext_SSD_300x300_iter_60000.caffemodel?dl=0
 
 Some examples of the scene text detection:
 
