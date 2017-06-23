@@ -1,12 +1,12 @@
-cur_dir=$(cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
-root_dir=$cur_dir/../..
-
+# cur_dir=$(cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
+# root_dir=$cur_dir/../..
+root_dir=/data/zhangxin/github/caffe_ssd
 cd $root_dir
 
 redo=1
-data_root_dir="$HOME/data/VOCdevkit"
+data_root_dir="./data/"
 dataset_name="scenetext"
-mapfile="$root_dir/data/$dataset_name/labelmap_voc_scenetext.prototxt"
+mapfile="./data/$dataset_name/labelmap_voc_scenetext.prototxt"
 anno_type="detection"
 db="lmdb"
 min_dim=0
