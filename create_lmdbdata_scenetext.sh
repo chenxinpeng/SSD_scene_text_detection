@@ -7,7 +7,7 @@ caffe_root=/data/zhangxin/github/caffe_ssd
 echo 'caffe_root :' $caffe_root
 
 redo=1
-data_root_dir=$root_dir/data/
+data_root_dir=$root_dir/data
 echo 'data_root_dir' $data_root_dir
 
 dataset_name="scenetext"
