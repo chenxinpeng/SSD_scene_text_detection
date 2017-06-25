@@ -16,8 +16,8 @@ def create_file(filename, img_dir, xml_dir, suffix):
     '''
     with open(filename, 'w') as fobj:
         for imgpath in glob.glob(img_dir + '/*' + suffix):
-            imgnum = os.path.splitext(os.path.basename(imgpath))[0]
-            xmlpath = os.path.join(xml_dir, str(imgnum), '.xml')
+            img_name = os.path.splitext(os.path.basename(imgpath))[0]
+            xmlpath = os.path.join(xml_dir, img_name, '.xml')
             fobj.write(imgpath + ' ' + xmlpath + '\n')
 
 

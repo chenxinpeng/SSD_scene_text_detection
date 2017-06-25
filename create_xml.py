@@ -14,17 +14,17 @@ from config import TextDetectionConfig as cfg
 def create_xml(img_dir, txt_dir, xml_dir, suffix):
     '''create xml'''
     for imgpath in glob.glob(img_dir + '/*' + suffix):
-        img_num = os.path.splitext(os.path.basename(imgpath))[0]
+        img_name = os.path.splitext(os.path.basename(imgpath))[0]
 
-        width, height = Image.open((img_dir + '/' + img_num + suffix)).size
-        print imgpath, img_num, width, height
+        width, height = Image.open((img_dir + '/' + img_name + suffix)).size
+        print imgpath, img_name, width, height
 
         # write in xml file
-        # os.mknod(src_txt_dir + '/' + img_num + '.xml')
-        xml_file = open((xml_dir + '/' + img_num + '.xml'), 'w')
+        # os.mknod(src_txt_dir + '/' + img_name + '.xml')
+        xml_file = open((xml_dir + '/' + img_name + '.xml'), 'w')
         xml_file.write('<annotation>\n')
         xml_file.write('    <folder>VOC2007</folder>\n')
-        xml_file.write('    <filename>' + str(img_num) + suffix + '</filename>\n')
+        xml_file.write('    <filename>' + str(img_name) + suffix + '</filename>\n')
         xml_file.write('    <size>\n')
         xml_file.write('        <width>' + str(width) + '</width>\n')
         xml_file.write('        <height>' + str(height) + '</height>\n')
@@ -32,7 +32,7 @@ def create_xml(img_dir, txt_dir, xml_dir, suffix):
         xml_file.write('    </size>\n')
 
         # open the crospronding txt file
-        gt_file_name = os.path.join(txt_dir, 'gt_' + img_num + '.txt')
+        gt_file_name = os.path.join(txt_dir, 'gt_' + img_name + '.txt')
         # write the region of text on xml file
         for img_each_label in open(gt_file_name, 'r').read().splitlines():
             spt = img_each_label.split(',')
