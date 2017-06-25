@@ -12,7 +12,12 @@ from PIL import Image
 from config import TextDetectionConfig as cfg
 
 def create_xml(img_dir, txt_dir, xml_dir, suffix):
-    '''create xml'''
+    '''create xml
+        img_dir 图片存放路径
+        txt_dir 标注txt存放路径
+        xml_dir xml存放路径
+        suffix 图片后缀
+    '''
     for imgpath in glob.glob(img_dir + '/*' + suffix):
         img_name = os.path.splitext(os.path.basename(imgpath))[0]
 

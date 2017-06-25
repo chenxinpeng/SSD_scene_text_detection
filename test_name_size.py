@@ -11,7 +11,10 @@ from config import TextDetectionConfig as cfg
 
 
 def get_name_size(img_dir, namesize_file):
-    ''' get name size'''
+    ''' get name size
+        img_dir 图片路径
+        namesize_file name_size文件存放路径
+    '''
     with open(namesize_file, 'w') as nsfile:
         for imgpath in glob.glob(os.path.join(img_dir, '*' + cfg.suffix)):
             width, height = Image.open(imgpath).size

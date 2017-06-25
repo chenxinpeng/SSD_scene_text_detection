@@ -13,6 +13,10 @@ from config import TextDetectionConfig as cfg
 
 def create_file(filename, img_dir, xml_dir, suffix):
     '''生成训练图像与 XML 标签的位置文件
+        filename 文件列表存放路径
+        img_dir 图片存放路径
+        xml_dir xml存放路径
+        suffix 图片后缀名
     '''
     with open(filename, 'w') as fobj:
         for imgpath in glob.glob(img_dir + '/*' + suffix):
