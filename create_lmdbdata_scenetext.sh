@@ -1,6 +1,6 @@
 cur_dir=$(cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
 root_dir=$cur_dir
-echo 'root_dir :', $root_dir
+echo 'root_dir :' $root_dir
 
 caffe_root=/data/zhangxin/github/caffe_ssd
 # caffe_root=$HOME/github/caffe_ssd

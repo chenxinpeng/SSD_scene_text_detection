@@ -1,3 +1,4 @@
+#encoding=utf8
 #! /usr/bin/python
 '''
 img_name height width
