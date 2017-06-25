@@ -57,5 +57,11 @@ def create_xml(img_dir, txt_dir, xml_dir, suffix):
         xml_file.write('</annotation>')
 
 if __name__ == '__main__':
-    create_xml(cfg.train_img_dir, cfg.train_txt_dir, cfg.train_xml_dir, cfg.suffix)
-    create_xml(cfg.test_img_dir, cfg.test_txt_dir, cfg.test_xml_dir, cfg.suffix)
+    create_xml(os.path.join(cfg.data_dir, cfg.dataset_name, cfg.train_img_dir),
+               os.path.join(cfg.data_dir, cfg.dataset_name, cfg.train_txt_dir),
+               os.path.join(cfg.data_dir, cfg.dataset_name, cfg.train_xml_dir),
+               cfg.suffix)
+    create_xml(os.path.join(cfg.data_dir, cfg.dataset_name, cfg.test_img_dir),
+               os.path.join(cfg.data_dir, cfg.dataset_name, cfg.test_txt_dir),
+               os.path.join(cfg.data_dir, cfg.dataset_name, cfg.test_xml_dir),
+               cfg.suffix)
