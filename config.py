@@ -10,22 +10,24 @@ import os
 class TextDetectionConfig:
     '''经常用到的路径'''
     caffe_root = '/data/zhangxin/github/caffe_ssd'
-    data_dir = './data/'
+    data_dir = 'data/'
+    dataset_name = 'scenetext'
     # train_data_dir = os.path.join(data_dir, 'train-textloc')
     # test_data_dir = os.path.join(data_dir, 'test-textloc-gt')
     suffix = '.jpg'
 
-    train_img_dir = os.path.join(data_dir, 'train-textloc')
-    train_xml_dir = os.path.join(data_dir, 'train-textloc')
-    train_txt_dir = os.path.join(data_dir, 'train-textloc')
-    test_img_dir = os.path.join(data_dir, 'test-textloc-gt')
-    test_xml_dir = os.path.join(data_dir, 'test-textloc-gt')
-    test_txt_dir = os.path.join(data_dir, 'test-textloc-gt')
+    train_img_dir = os.path.join(data_dir, dataset_name, 'train-textloc')
+    train_xml_dir = os.path.join(data_dir, dataset_name, 'train-textloc')
+    train_txt_dir = os.path.join(data_dir, dataset_name, 'train-textloc')
+    test_img_dir = os.path.join(data_dir, dataset_name, 'test-textloc-gt')
+    test_xml_dir = os.path.join(data_dir, dataset_name, 'test-textloc-gt')
+    test_txt_dir = os.path.join(data_dir, dataset_name, 'test-textloc-gt')
 
 if __name__ == '__main__':
     cfg = TextDetectionConfig()
     print cfg.caffe_root
     print cfg.data_dir
+    print cfg.dataset_name
     # print cfg.train_data_dir
     # print cfg.test_data_dir
     print cfg.suffix

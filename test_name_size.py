@@ -24,6 +24,6 @@ def get_name_size(img_dir, namesize_file):
 
 
 get_name_size(cfg.train_img_dir,
-              os.path.join(cfg.data_dir, 'train_name_size.txt'))
+              os.path.join(cfg.data_dir, cfg.dataset_name, 'train_name_size.txt'))
 get_name_size(cfg.test_img_dir,
-              os.path.join(cfg.data_dir, 'test_name_size.txt'))
+              os.path.join(cfg.data_dir, cfg.dataset_name, 'test_name_size.txt'))

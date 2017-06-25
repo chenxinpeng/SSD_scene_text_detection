@@ -25,7 +25,7 @@ def create_file(filename, img_dir, xml_dir, suffix):
             fobj.write(imgpath + ' ' + xmlpath + '\n')
 
 
-create_file(os.path.join(cfg.data_dir, "trainval.txt"),
+create_file(os.path.join(cfg.data_dir, cfg.dataset_name, "trainval.txt"),
             cfg.train_img_dir, cfg.train_xml_dir, cfg.suffix)
-create_file(os.path.join(cfg.data_dir, "test.txt"),
+create_file(os.path.join(cfg.data_dir, cfg.dataset_name, "test.txt"),
             cfg.test_img_dir, cfg.test_xml_dir, cfg.suffix)
