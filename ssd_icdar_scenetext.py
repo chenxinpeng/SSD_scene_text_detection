@@ -10,6 +10,8 @@ import stat
 import subprocess
 import sys
 
+from config import TextDetectionConfig as cfg
+
 # Add extra layers on top of a "base" network (e.g. VGGNet or Inception).
 def AddExtraLayers(net, use_batchnorm=True):
     use_relu = True
@@ -43,7 +45,7 @@ def AddExtraLayers(net, use_batchnorm=True):
 ### Modify the following parameters accordingly ###
 # The directory which contains the caffe code.
 # We assume you are running the script at the CAFFE_ROOT.
-caffe_root = os.getcwd()
+caffe_root = cfg.caffe_root# os.getcwd()
 
 # Set true if you want to start training right after generating all files.
 run_soon = True
@@ -54,9 +56,9 @@ resume_training = True
 remove_old_models = False
 
 # The database file for training data. Created by data/VOC0712/create_data.sh
-train_data = "examples/scenetext_trainval_lmdb"
+train_data = os.path.join("examples/", cfg.dataset_name, "scenetext_trainval_lmdb")
 # The database file for testing data. Created by data/VOC0712/create_data.sh
-test_data = "examples/scenetext_test_lmdb"
+test_data = os.path.join("examples/", cfg.dataset_name, "scenetext_test_lmdb")
 # Specify the batch sampler.
 resize_width = 300
 resize_height = 300
@@ -200,7 +202,9 @@ snapshot_dir = "models/VGGNet/scenetext/{}".format(job_name)
 # Directory which stores the job script and log file.
 job_dir = "jobs/VGGNet/scenetext/{}".format(job_name)
 # Directory which stores the detection results.
-output_result_dir = "{}/data/VOCdevkit/results/{}".format(os.environ['HOME'], job_name)
+# output_result_dir = "{}/data/VOCdevkit/results/{}".format(os.environ['HOME'], job_name)
+output_result_dir = "{}/results/{}".format(cfg.data_dir, job_name)
+
 
 # model definition files.
 train_net_file = "{}/train.prototxt".format(save_dir)
@@ -215,9 +219,10 @@ job_file = "{}/{}.sh".format(job_dir, model_name)
 # Stores the test image names and sizes. Created by data/VOC0712/create_list.sh
 name_size_file = "data/scenetext/test_name_size.txt"
 # The pretrained model. We use the Fully convolutional reduced (atrous) VGGNet.
-pretrain_model = "models/VGGNet/VGG_ILSVRC_16_layers_fc_reduced.caffemodel"
+pretrain_model = os.path.join(caffe_root,
+                              "models/VGGNet/VGG_ILSVRC_16_layers_fc_reduced.caffemodel")
 # Stores LabelMapItem.
-label_map_file = "data/scenetext/labelmap_voc.prototxt"
+label_map_file = "data/scenetext/labelmap_voc_scenetext.prototxt"
 
 # MultiBoxLoss parameters.
 num_classes = 2
@@ -239,7 +244,8 @@ multibox_loss_param = {
     'use_prior_for_matching': True,
     'background_label_id': background_label_id,
     'use_difficult_gt': train_on_diff_gt,
-    'do_neg_mining': True,
+    #'do_neg_mining': True,
+    'mining_type': True,
     'neg_pos_ratio': neg_pos_ratio,
     'neg_overlap': 0.5,
     'code_type': code_type,
@@ -282,7 +288,7 @@ clip = True
 
 # Solver parameters.
 # Defining which GPUs to use.
-gpus = "0,1,2,3"
+gpus = "6,7"
 gpulist = gpus.split(",")
 num_gpus = len(gpulist)
 
@@ -508,8 +514,8 @@ if remove_old_models:
 
 # Create job file.
 with open(job_file, 'w') as f:
-  f.write('cd {}\n'.format(caffe_root))
-  f.write('./build/tools/caffe train \\\n')
+  # f.write('cd {}\n'.format(caffe_root))
+  f.write(os.path.join(caffe_root, 'build/tools/caffe') + ' train \\\n')
   f.write('--solver="{}" \\\n'.format(solver_file))
   f.write(train_src_param)
   if solver_param['solver_mode'] == P.Solver.GPU:
