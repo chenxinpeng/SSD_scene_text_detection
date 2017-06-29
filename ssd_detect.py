@@ -7,6 +7,7 @@ In this example, we will load a SSD model and use it to detect objects.
 import os
 import sys
 import argparse
+import glob
 import numpy as np
 from PIL import Image, ImageDraw
 # Make sure that caffe is on the python path:
@@ -106,15 +107,9 @@ class CaffeDetection:
             result.append([xmin, ymin, xmax, ymax, label, score, label_name])
         return result
 
-def main(args):
-    '''main '''
-    detection = CaffeDetection(args.gpu_id,
-                               args.model_def, args.model_weights,
-                               args.image_resize, args.labelmap_file)
-    result = detection.detect(args.image_file)
-    print result
-
-    img = Image.open(args.image_file)
+def test(det, image_file, savepath):
+    result = det.detect(image_file)
+    img = Image.open(image_file)
     draw = ImageDraw.Draw(img)
     width, height = img.size
     print width, height
@@ -128,11 +123,32 @@ def main(args):
         print item
         print [xmin, ymin, xmax, ymax]
         print [xmin, ymin], item[-1]
+    img.save(savepath)
 
+def test_batch(det, in_dir, out_dir):
+    files = glob.glob(os.path.join(in_dir, '*.jpg'))
+    files += glob.glob(os.path.join(in_dir, '*.png'))
+    files += glob.glob(os.path.join(in_dir, '*.jpeg'))
+    for image_file in files:
+        print image_file
+        if not os.path.isfile(image_file):
+            continue
+        savepath = os.path.join(out_dir, os.path.basename(image_file))
+        test(det, image_file, savepath)
+
+def main(args):
+    '''main '''
     if not os.path.exists(args.out_dir):
         os.makedirs(args.out_dir)
-    savepath = os.path.join(args.out_dir, os.path.basename(args.image_file))
-    img.save(savepath)
+
+    detection = CaffeDetection(args.gpu_id,
+                               args.model_def, args.model_weights,
+                               args.image_resize, args.labelmap_file)
+    if os.path.isfile(args.image_file):
+        savepath = os.path.join(args.out_dir, os.path.basename(args.image_file))
+        test(detection, args.image_file, savepath)
+    else:
+        test_batch(detection, args.image_file, args.out_dir)
 
 
 def parse_args():
