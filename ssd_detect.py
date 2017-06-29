@@ -128,7 +128,11 @@ def main(args):
         print item
         print [xmin, ymin, xmax, ymax]
         print [xmin, ymin], item[-1]
-    img.save('detect_result.jpg')
+    
+    if not os.path.exists(args.out_dir):
+        os.makedirs(args.out_dir)
+    savepath = os.path.join(args.out_dir, os.path.basename(args.image_file))
+    img.save(savepath)
 
 
 def parse_args():
@@ -144,6 +148,7 @@ def parse_args():
                         default='models/VGGNet/scenetext/SSD_300x300/'
                         'VGG_scenetext_SSD_300x300_iter_50000.caffemodel')
     parser.add_argument('--image_file', default='data/scenetext/test-textloc-gt/101.jpg')
+    parser.add_argument('--out_dir', default='results/')
     return parser.parse_args()
 
 if __name__ == '__main__':
