@@ -59,7 +59,7 @@ class CaffeDetection:
         self.labelmap = caffe_pb2.LabelMap()
         text_format.Merge(str(file.read()), self.labelmap)
 
-    def detect(self, image_file, conf_thresh=0.5, topn=5):
+    def detect(self, image_file, conf_thresh=0.5, topn=30):
         '''
         SSD detection
         '''
@@ -128,7 +128,7 @@ def main(args):
         print item
         print [xmin, ymin, xmax, ymax]
         print [xmin, ymin], item[-1]
-    
+
     if not os.path.exists(args.out_dir):
         os.makedirs(args.out_dir)
     savepath = os.path.join(args.out_dir, os.path.basename(args.image_file))
