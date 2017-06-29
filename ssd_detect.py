@@ -60,7 +60,7 @@ class CaffeDetection:
         self.labelmap = caffe_pb2.LabelMap()
         text_format.Merge(str(file.read()), self.labelmap)
 
-    def detect(self, image_file, conf_thresh=0.5, topn=30):
+    def detect(self, image_file, conf_thresh=0.01, topn=100):
         '''
         SSD detection
         '''
@@ -118,8 +118,8 @@ def test(det, image_file, savepath):
         ymin = int(round(item[1] * height))
         xmax = int(round(item[2] * width))
         ymax = int(round(item[3] * height))
-        draw.rectangle([xmin, ymin, xmax, ymax], outline=(255, 0, 0))
-        draw.text([xmin, ymin], item[-1] + str(item[-2]), (0, 0, 255))
+        draw.rectangle([xmin, ymin, xmax, ymax], outline=(0, 0, 255))
+        # draw.text([xmin, ymin], item[-1] + str(item[-2]), (0, 0, 255))
         print item
         print [xmin, ymin, xmax, ymax]
         print [xmin, ymin], item[-1]
