@@ -23,6 +23,21 @@ class TextDetectionConfig:
     test_xml_dir = 'test-textloc-gt'
     test_txt_dir = 'test-textloc-gt'
 
+    db_format = "lmdb"
+    train_lmdb_dir = os.path.join(data_dir, dataset_name, db_format,
+                                  dataset_name+'_trainval_'+db_format)
+    test_lmdb_dir = os.path.join(data_dir, dataset_name, db_format,
+                                 dataset_name+'_test_'+db_format)
+
+    gt_file_prefix = 'gt_'
+    labelmap_file = 'labelmap_voc_{}.prototxt'.format(dataset_name)
+
+
+def create_dir(path):
+    '''创建文件夹'''
+    if os.path.exists(path):
+        os.makedirs(path)
+
 if __name__ == '__main__':
     cfg = TextDetectionConfig()
     print cfg.caffe_root

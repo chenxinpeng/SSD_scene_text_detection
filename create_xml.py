@@ -37,12 +37,12 @@ def create_xml(img_dir, txt_dir, xml_dir, suffix):
         xml_file.write('    </size>\n')
 
         # open the crospronding txt file
-        gt_file_name = os.path.join(txt_dir, 'gt_' + img_name + '.txt')
+        gt_file_name = os.path.join(txt_dir, cfg.gt_file_prefix + img_name + '.txt')
         # write the region of text on xml file
         for img_each_label in open(gt_file_name, 'r').read().splitlines():
             spt = img_each_label.split(',')
             xml_file.write('    <object>\n')
-            xml_file.write('        <name>text</name>\n')
+            xml_file.write('        <name>' + cfg.dataset_name + '</name>\n')
             xml_file.write('        <pose>Unspecified</pose>\n')
             xml_file.write('        <truncated>0</truncated>\n')
             xml_file.write('        <difficult>0</difficult>\n')
