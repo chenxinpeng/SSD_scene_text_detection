@@ -40,7 +40,7 @@ class CaffeDetection:
     def __init__(self, gpu_id, model_def, model_weights, image_resize, labelmap_file):
         caffe.set_device(gpu_id)
         caffe.set_mode_gpu()
-
+        # image_resize = 300
         self.image_resize = image_resize
         # Load the net in the test phase for inference, and configure input preprocessing.
         self.net = caffe.Net(model_def,      # defines the structure of the model
@@ -65,7 +65,6 @@ class CaffeDetection:
         SSD detection
         '''
         # set net to batch size of 1
-        # image_resize = 300
         self.net.blobs['data'].reshape(1, 3, self.image_resize, self.image_resize)
         image = caffe.io.load_image(image_file)
 
@@ -108,7 +107,12 @@ class CaffeDetection:
         return result
 
 def test(det, image_file, savepath):
-    result = det.detect(image_file)
+    '''test one image'''
+    try:
+        result = det.detect(image_file)
+    except ValueError, err:
+        print err
+        return
     img = Image.open(image_file)
     draw = ImageDraw.Draw(img)
     width, height = img.size
@@ -130,9 +134,9 @@ def test_batch(det, in_dir, out_dir):
     files += glob.glob(os.path.join(in_dir, '*.png'))
     files += glob.glob(os.path.join(in_dir, '*.jpeg'))
     for image_file in files:
-        print image_file
         if not os.path.isfile(image_file):
             continue
+        print image_file
         savepath = os.path.join(out_dir, os.path.basename(image_file))
         test(det, image_file, savepath)
 
