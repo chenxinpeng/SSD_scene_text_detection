@@ -56,11 +56,9 @@ resume_training = True
 remove_old_models = False
 
 # The database file for training data. Created by data/VOC0712/create_data.sh
-# train_data = os.path.join("examples/", cfg.dataset_name, "{}_trainval_lmdb".format(cfg.dataset_name))
+train_data = os.path.join("examples/", cfg.dataset_name, "scenetext_trainval_lmdb")
 # The database file for testing data. Created by data/VOC0712/create_data.sh
-# test_data = os.path.join("examples/", cfg.dataset_name, "{}_test_lmdb".format(cfg.dataset_name))
-train_data = cfg.train_lmdb_dir
-test_data = cfg.test_lmdb_dir
+test_data = os.path.join("examples/", cfg.dataset_name, "scenetext_test_lmdb")
 # Specify the batch sampler.
 resize_width = 300
 resize_height = 300
@@ -195,14 +193,14 @@ else:
 # Modify the job name if you want.
 job_name = "SSD_{}".format(resize)
 # The name of the model. Modify it if you want.
-model_name = "VGG_{}_{}".format(cfg.dataset_name, job_name)
+model_name = "VGG_scenetext_{}".format(job_name)
 
 # Directory which stores the model .prototxt file.
-save_dir = "models/VGGNet/{}/{}".format(cfg.dataset_name, job_name)
+save_dir = "models/VGGNet/scenetext/{}".format(job_name)
 # Directory which stores the snapshot of models.
-snapshot_dir = "models/VGGNet/{}/{}".format(cfg.dataset_name, job_name)
+snapshot_dir = "models/VGGNet/scenetext/{}".format(job_name)
 # Directory which stores the job script and log file.
-job_dir = "jobs/VGGNet/{}/{}".format(cfg.dataset_name, job_name)
+job_dir = "jobs/VGGNet/scenetext/{}".format(job_name)
 # Directory which stores the detection results.
 # output_result_dir = "{}/data/VOCdevkit/results/{}".format(os.environ['HOME'], job_name)
 output_result_dir = "{}/results/{}".format(cfg.data_dir, job_name)
@@ -219,12 +217,12 @@ snapshot_prefix = "{}/{}".format(snapshot_dir, model_name)
 job_file = "{}/{}.sh".format(job_dir, model_name)
 
 # Stores the test image names and sizes. Created by data/VOC0712/create_list.sh
-name_size_file = "{}/{}/test_name_size.txt".format(cfg.data_dir, cfg.dataset_name)
+name_size_file = "data/scenetext/test_name_size.txt"
 # The pretrained model. We use the Fully convolutional reduced (atrous) VGGNet.
 pretrain_model = os.path.join(caffe_root,
                               "models/VGGNet/VGG_ILSVRC_16_layers_fc_reduced.caffemodel")
 # Stores LabelMapItem.
-label_map_file = "{1}/{0}/labelmap_voc_{0}.prototxt".format(cfg.dataset_name, cfg.data_dir)
+label_map_file = "data/scenetext/labelmap_voc_scenetext.prototxt"
 
 # MultiBoxLoss parameters.
 num_classes = 2
@@ -290,7 +288,7 @@ clip = True
 
 # Solver parameters.
 # Defining which GPUs to use.
-gpus = "1,2"
+gpus = "4,5,6,7"
 gpulist = gpus.split(",")
 num_gpus = len(gpulist)
 
@@ -333,8 +331,8 @@ solver_param = {
     'gamma': 0.1,
     'momentum': 0.9,
     'iter_size': iter_size,
-    'max_iter': 100000,
-    'snapshot': 10000,
+    'max_iter': 60000,
+    'snapshot': 40000,
     'display': 10,
     'average_loss': 10,
     'type': "SGD",

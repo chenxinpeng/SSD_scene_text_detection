@@ -1,31 +1,37 @@
+#encoding=utf8
+'''
+生成训练图像与 XML 标签的位置文件
+'''
 #! /usr/bin/python
 
-import os, sys
+import os
+# import sys
 import glob
 
-trainval_dir = "/home/chenxp/data/VOCdevkit/scenetext/trainval"
-test_dir = "/home/chenxp/data/VOCdevkit/scenetext/test"
+from config import TextDetectionConfig as cfg
 
-trainval_img_lists = glob.glob(trainval_dir + '/*.jpg')
-trainval_img_names = []
-for item in trainval_img_lists:
-    temp1, temp2 = os.path.splitext(os.path.basename(item))
-    trainval_img_names.append(temp1)
 
-test_img_lists = glob.glob(test_dir + '/*.jpg')
-test_img_names = []
-for item in test_img_lists:
-    temp1, temp2 = os.path.splitext(os.path.basename(item))
-    test_img_names.append(temp1)
+def create_file(filename, data_dir, dataset_name, img_dir, xml_dir, suffix):
+    '''生成训练图像与 XML 标签的位置文件
+        filename 文件列表存放路径
+        img_dir 图片存放路径
+        xml_dir xml存放路径
+        suffix 图片后缀名
+    '''
+    filelist = os.path.join(data_dir, dataset_name, filename)
+    with open(filelist, 'w') as fobj:
+        for imgpath in glob.glob(os.path.join(data_dir, dataset_name, img_dir) + '/*' + suffix):
+            img_basename = os.path.basename(imgpath)
+            img_name = os.path.splitext(img_basename)[0]
+            xmlpath = os.path.join(dataset_name, xml_dir, img_name + '.xml')
+            fobj.write(os.path.join(dataset_name, img_dir, img_basename) + ' ' + xmlpath + '\n')
 
-dist_img_dir = "scenetext/JPEGImages"
-dist_anno_dir = "scenetext/Annotations"
 
-trainval_fd = open("/home/chenxp/caffe/data/scenetext/trainval.txt", 'w')
-test_fd = open("/home/chenxp/caffe/data/scenetext/test.txt", 'w')
-
-for item in trainval_img_names:
-    trainval_fd.write(dist_img_dir + '/' + str(item) + '.jpg' + ' ' + dist_anno_dir + '/' + str(item) + '.xml\n')
-
-for item in test_img_names:
-    test_fd.write(dist_img_dir + '/' + str(item) + '.jpg' + ' ' + dist_anno_dir + '/' + str(item) + '.xml\n')
+create_file("trainval.txt",
+            cfg.data_dir, cfg.dataset_name,
+            cfg.train_img_dir, cfg.train_xml_dir,
+            cfg.suffix)
+create_file("test.txt",
+            cfg.data_dir, cfg.dataset_name,
+            cfg.test_img_dir, cfg.test_xml_dir,
+            cfg.suffix)

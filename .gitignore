@@ -1,0 +1,5 @@
+*.pyc
+*.log
+*.DS_Store
+data/
+jobs.zip

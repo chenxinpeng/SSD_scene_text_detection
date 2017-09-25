@@ -1,17 +1,31 @@
+#encoding=utf8
 #! /usr/bin/python
-
-import os, sys
+'''
+img_name height width
+'''
+import os
+# import sys
 import glob
 from PIL import Image
 
-img_dir = "/home/chenxp/data/VOCdevkit/scenetext/JPEGImages"
+from config import TextDetectionConfig as cfg
 
-img_lists = glob.glob(img_dir + '/*.jpg')
 
-test_name_size = open('/home/chenxp/caffe/data/scenetext/test_name_size.txt', 'w')
+def get_name_size(img_dir, namesize_file):
+    ''' get name size
+        img_dir 图片路径
+        namesize_file name_size文件存放路径
+    '''
+    print img_dir
+    print namesize_file
+    with open(namesize_file, 'w') as nsfile:
+        for imgpath in glob.glob(os.path.join(img_dir, '*' + cfg.suffix)):
+            width, height = Image.open(imgpath).size
+            img_name = os.path.splitext(os.path.basename(imgpath))[0]
+            nsfile.write(img_name + ' ' + str(height) + ' ' + str(width) + '\n')
 
-for item in img_lists:
-    img = Image.open(item)
-    width, height = img.size
-    temp1, temp2 = os.path.splitext(os.path.basename(item))
-    test_name_size.write(temp1 + ' ' + str(height) + ' ' + str(width) + '\n')
+
+get_name_size(os.path.join(cfg.data_dir, cfg.dataset_name, cfg.train_img_dir),
+              os.path.join(cfg.data_dir, cfg.dataset_name, 'train_name_size.txt'))
+get_name_size(os.path.join(cfg.data_dir, cfg.dataset_name, cfg.test_img_dir),
+              os.path.join(cfg.data_dir, cfg.dataset_name, 'test_name_size.txt'))
