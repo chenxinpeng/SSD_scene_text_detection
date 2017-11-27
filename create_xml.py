@@ -54,3 +54,4 @@ for img in img_names:
         xml_file.write('    </object>\n')
 
     xml_file.write('</annotation>')
+

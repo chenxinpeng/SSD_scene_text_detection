@@ -26,3 +26,4 @@ do
   --check-label $extra_cmd $data_root_dir $root_dir/data/$dataset_name/$subset.txt \
   $data_root_dir/$dataset_name/$db/$dataset_name"_"$subset"_"$db examples/$dataset_name
 done
+

@@ -15,3 +15,4 @@ for item in img_lists:
     width, height = img.size
     temp1, temp2 = os.path.splitext(os.path.basename(item))
     test_name_size.write(temp1 + ' ' + str(height) + ' ' + str(width) + '\n')
+

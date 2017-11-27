@@ -29,3 +29,4 @@ for item in trainval_img_names:
 
 for item in test_img_names:
     test_fd.write(dist_img_dir + '/' + str(item) + '.jpg' + ' ' + dist_anno_dir + '/' + str(item) + '.xml\n')
+
