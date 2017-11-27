@@ -12,10 +12,13 @@ Meanwhile, I have uploaded my training caffemodel to BaiduYun, Google Drive, Dro
  - Dropbox: https://www.dropbox.com/s/o3mrsfoiyfp21ou/VGG_scenetext_SSD_300x300_iter_60000.caffemodel?dl=0
 
 Some examples of the scene text detection:
+### Good Cases
 
 <img src="https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_101.png" width="400">
-
 <img src="https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_120.png" width="400">
+
+### Bad Cases
+<img src="https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_104.png" width="400">
 
 ## Note
 Currently, I mainly focus on image/video captioning.
