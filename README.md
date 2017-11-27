@@ -4,7 +4,7 @@ The note about the original paper: [SSD: Single Shot MultiBox Detector](https://
 
 This practice is inspired by [ssd-plate_detection](https://github.com/hyh21521038/ssd-plate_detection)
 
-The detail of the above code can read my blog: http://blog.csdn.net/u010167269/article/details/52851667 , which was written in chinese.
+The detail of the above code can read my blog: http://blog.csdn.net/u010167269/article/details/52851667, which was written in chinese.
 
 Meanwhile, I have uploaded my training caffemodel to BaiduYun, Google Drive, Dropbox. 
  - BaiduYun：https://pan.baidu.com/s/1dE0Ok3v
