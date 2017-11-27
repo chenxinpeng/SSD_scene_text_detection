@@ -13,9 +13,9 @@ Meanwhile, I have uploaded my training caffemodel to BaiduYun, Google Drive, Dro
 
 Some examples of the scene text detection:
 
-![img1=220x](https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_101.png)
+![img1=200x](https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_101.png)
 
-![img2=220x](https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_120.png)
+![img2=200x](https://github.com/chenxinpeng/SSD_scene-text-detection/blob/master/test_file/output_120.png)
 
 
 ## Note
