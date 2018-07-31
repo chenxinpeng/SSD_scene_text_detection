@@ -1,3 +1,6 @@
+## Note
+This repository is not being actively maintained due to lack of time and interest. My sincerest apologies to the open source community for allowing this project to stagnate. I hope it was useful for some of you as a jumping-off point.
+
 ## SSD_scene-text-detection
 
 The note about the original paper: [SSD: Single Shot MultiBox Detector](https://github.com/weiliu89/caffe/tree/ssd) can be found [here](http://blog.csdn.net/u010167269/article/details/52563573).
